@@ -1,0 +1,35 @@
+# Render deployment specification for EggTrade System (Node runtime + Aiven MySQL)
+services:
+  - type: web
+    name: eggtrade-laravel-system
+    env: node
+    plan: free
+    region: singapore # Options: singapore, oregon, frankfurt, ohio
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_NAME
+        value: EggTrade
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false # Set to your Aiven MySQL Host (e.g. mysql-xxxx.aivencloud.com)
+      - key: DB_PORT
+        value: "25000" # Set to your Aiven MySQL Port
+      - key: DB_DATABASE
+        value: defaultdb # Or your custom Aiven DB name
+      - key: DB_USERNAME
+        value: avnadmin # Default Aiven admin user
+      - key: DB_PASSWORD
+        sync: false # Set to your secret Aiven password in Render dashboard
+      - key: DB_SSL_MODE
+        value: REQUIRED
+
