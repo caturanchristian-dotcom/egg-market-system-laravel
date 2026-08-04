@@ -18,6 +18,7 @@ services:
         value: "false"
       - key: APP_KEY
         generateValue: true
+
       - key: DB_CONNECTION
         value: mysql
       - key: DB_HOST
